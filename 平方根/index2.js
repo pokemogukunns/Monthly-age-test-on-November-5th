@@ -16,6 +16,7 @@ function displayQuestions() {
             <input type="text" id="answer-${i}" placeholder="答えを入力" />
             <div id="result-${i}" class="result"></div>
             <div id="explanation-${i}" class="explanation" style="display: none;"></div>
+            <input type="hidden" id="correct-${i}" value="${correctAnswer}" />
         `;
         questionsContainer.appendChild(questionDiv);
     }
@@ -26,10 +27,9 @@ function checkAnswers() {
         const userAnswer = document.getElementById(`answer-${i}`).value.trim();
         const resultDiv = document.getElementById(`result-${i}`);
         const explanationDiv = document.getElementById(`explanation-${i}`);
+        const correctAnswer = document.getElementById(`correct-${i}`).value;
 
-        const { correctAnswer } = generateRandomSquareRootQuestion();
-
-        if (parseInt(userAnswer, 10) === correctAnswer) {
+        if (parseInt(userAnswer, 10) === parseInt(correctAnswer, 10)) {
             resultDiv.textContent = "⭕️ 正解！";
             explanationDiv.style.display = "none";
         } else {
